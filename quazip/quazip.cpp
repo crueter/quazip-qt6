@@ -73,8 +73,8 @@ class QuaZipPrivate {
     /// The OS code.
     uint osCode;
     /// The constructor for the corresponding QuaZip constructor.
-    inline QuaZipPrivate(QuaZip *q):
-      q(q),
+    inline QuaZipPrivate(QuaZip *_q):
+      q(_q),
       ioDevice(nullptr),
       mode(QuaZip::mdNotOpen),
       hasCurrentFile_f(false),
@@ -91,9 +91,9 @@ class QuaZipPrivate {
         lastMappedDirectoryEntry.pos_in_zip_directory = 0;
     }
     /// The constructor for the corresponding QuaZip constructor.
-    inline QuaZipPrivate(QuaZip *q, const QString &zipName):
-      q(q),
-      zipName(zipName),
+    inline QuaZipPrivate(QuaZip *_q, const QString &_zipName):
+      q(_q),
+      zipName(_zipName),
       ioDevice(nullptr),
       mode(QuaZip::mdNotOpen),
       hasCurrentFile_f(false),
@@ -110,9 +110,9 @@ class QuaZipPrivate {
         lastMappedDirectoryEntry.pos_in_zip_directory = 0;
     }
     /// The constructor for the corresponding QuaZip constructor.
-    inline QuaZipPrivate(QuaZip *q, QIODevice *ioDevice):
-      q(q),
-      ioDevice(ioDevice),
+    inline QuaZipPrivate(QuaZip *_q, QIODevice *_ioDevice):
+      q(_q),
+      ioDevice(_ioDevice),
       mode(QuaZip::mdNotOpen),
       hasCurrentFile_f(false),
       zipError(UNZ_OK),

@@ -126,9 +126,6 @@ extern "C" {
  #endif
 #endif
 
-
-
-
 typedef voidpf   (ZCALLBACK *open_file_func)      OF((voidpf opaque, voidpf file, int mode));
 typedef uLong    (ZCALLBACK *read_file_func)      OF((voidpf opaque, voidpf stream, void* buf, uLong size));
 typedef uLong    (ZCALLBACK *write_file_func)     OF((voidpf opaque, voidpf stream, const void* buf, uLong size));
@@ -137,7 +134,6 @@ typedef int      (ZCALLBACK *testerror_file_func) OF((voidpf opaque, voidpf stre
 
 typedef uLong     (ZCALLBACK *tell_file_func)      OF((voidpf opaque, voidpf stream));
 typedef int     (ZCALLBACK *seek_file_func)      OF((voidpf opaque, voidpf stream, uLong offset, int origin));
-
 
 /* here is the "old" 32 bits structure structure */
 typedef struct zlib_filefunc_def_s
