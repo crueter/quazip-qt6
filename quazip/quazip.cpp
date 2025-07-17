@@ -396,7 +396,6 @@ QString QuaZip::getComment()const
   if((fakeThis->p->zipError=unzGetGlobalComment(p->unzFile_f, comment.data(), comment.size())) < 0)
     return QString();
   fakeThis->p->zipError = UNZ_OK;
-  unsigned flags = 0;
   return QString::fromUtf8(comment);
 }
 
