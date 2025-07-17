@@ -220,18 +220,6 @@ class QUAZIP_EXPORT QuaZip {
      * as far as getZipError() is concerned.
       */
     void close();
-    /// Sets the codec used to encode/decode file names inside archive.
-    /** This is necessary to access files in the ZIP archive created
-     * under Windows with non-latin characters in file names. For
-     * example, file names with cyrillic letters will be in \c IBM866
-     * encoding.
-     **/
-    void setFileNameCodec(QTextCodec *fileNameCodec);
-    /// Sets the codec used to encode/decode file names inside archive.
-    /** \overload
-     * Equivalent to calling setFileNameCodec(QTextCodec::codecForName(codecName));
-     **/
-    void setFileNameCodec(const char *fileNameCodecName);
     /// Sets the OS code (highest 8 bits of the “version made by” field) for new files.
     /** There is currently no way to specify this for each file individually,
         except by calling this function before opening each file. If this function is not called,
@@ -240,19 +228,6 @@ class QUAZIP_EXPORT QuaZip {
     void setOsCode(uint osCode);
     /// Returns the OS code for new files.
     uint getOsCode() const;
-    /// Returns the codec used to encode/decode comments inside archive.
-    QTextCodec* getFileNameCodec() const;
-    /// Sets the codec used to encode/decode comments inside archive.
-    /** This codec defaults to locale codec, which is probably ok.
-     **/
-    void setCommentCodec(QTextCodec *commentCodec);
-    /// Sets the codec used to encode/decode comments inside archive.
-    /** \overload
-     * Equivalent to calling setCommentCodec(QTextCodec::codecForName(codecName));
-     **/
-    void setCommentCodec(const char *commentCodecName);
-    /// Returns the codec used to encode/decode comments inside archive.
-    QTextCodec* getCommentCodec() const;
     /// Returns the name of the ZIP file.
     /** Returns null string if no ZIP file name has been set, for
      * example when the QuaZip instance is set up to use a QIODevice
@@ -564,43 +539,6 @@ class QUAZIP_EXPORT QuaZip {
       @sa setIoDevice()
       */
     void setAutoClose(bool autoClose) const;
-    /// Sets the default file name codec to use.
-    /**
-     * The default codec is used by the constructors, so calling this function
-     * won't affect the QuaZip instances already created at that moment.
-     *
-     * The codec specified here can be overriden by calling setFileNameCodec().
-     * If neither function is called, QTextCodec::codecForLocale() will be used
-     * to decode or encode file names. Use this function with caution if
-     * the application uses other libraries that depend on QuaZip. Those
-     * libraries can either call this function by themselves, thus overriding
-     * your setting or can rely on the default encoding, thus failing
-     * mysteriously if you change it. For these reasons, it isn't recommended
-     * to use this function if you are developing a library, not an application.
-     * Instead, ask your library users to call it in case they need specific
-     * encoding.
-     *
-     * In most cases, using setFileNameCodec() instead is the right choice.
-     * However, if you depend on third-party code that uses QuaZip, then the
-     * reasons stated above can actually become a reason to use this function
-     * in case the third-party code in question fails because it doesn't
-     * understand the encoding you need and doesn't provide a way to specify it.
-     * This applies to the JlCompress class as well, as it was contributed and
-     * doesn't support explicit encoding parameters.
-     *
-     * In short: use setFileNameCodec() when you can, resort to
-     * setDefaultFileNameCodec() when you don't have access to the QuaZip
-     * instance.
-     *
-     * @param codec The codec to use by default. If null, resets to default.
-     */
-    static void setDefaultFileNameCodec(QTextCodec *codec);
-    /**
-     * @overload
-     * Equivalent to calling
-     * setDefaultFileNameCodec(QTextCodec::codecForName(codecName)).
-     */
-    static void setDefaultFileNameCodec(const char *codecName);
     /// Sets default OS code.
     /**
      * @sa setOsCode()

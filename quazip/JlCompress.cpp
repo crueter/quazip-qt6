@@ -384,16 +384,10 @@ QStringList JlCompress::extractFiles(QuaZip &zip, const QStringList &files, cons
     return extracted;
 }
 
-QStringList JlCompress::extractDir(QString fileCompressed, QTextCodec* fileNameCodec, QString dir) {
+QStringList JlCompress::extractDir(QString fileCompressed, QString dir) {
     // Open zip
     QuaZip zip(fileCompressed);
-    if (fileNameCodec)
-        zip.setFileNameCodec(fileNameCodec);
     return extractDir(zip, dir);
-}
-
-QStringList JlCompress::extractDir(QString fileCompressed, QString dir) {
-    return extractDir(fileCompressed, nullptr, dir);
 }
 
 QStringList JlCompress::extractDir(QuaZip &zip, const QString &dir)
@@ -468,17 +462,10 @@ QStringList JlCompress::getFileList(QuaZip *zip)
     return lst;
 }
 
-QStringList JlCompress::extractDir(QIODevice* ioDevice, QTextCodec* fileNameCodec, QString dir)
+QStringList JlCompress::extractDir(QIODevice* ioDevice, QString dir)
 {
     QuaZip zip(ioDevice);
-    if (fileNameCodec)
-        zip.setFileNameCodec(fileNameCodec);
     return extractDir(zip, dir);
-}
-
-QStringList JlCompress::extractDir(QIODevice *ioDevice, QString dir)
-{
-    return extractDir(ioDevice, nullptr, dir);
 }
 
 QStringList JlCompress::getFileList(QIODevice *ioDevice)
